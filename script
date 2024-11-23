@@ -1,0 +1,15 @@
+config load "C:\_AI_Projects\AI_as_a_Service\AIaaS\backend\project_service\templates\SystemPerformance\boards\B-L475E-IOT01A2\B-L475E-IOT01A2.ioc"
+project toolchain STM32CubeIDE
+
+
+pack enable STMicroelectronics X-CUBE-AI 9.0.0 "Artificial Intelligence" Core
+pack enable STMicroelectronics X-CUBE-AI 9.0.0 Device Application SystemPerformance
+pack validate
+AI set modes
+AI load requiredPreloadScript
+AI add model "network" "tflite" "C:\_AI_Projects\AI_as_a_Service\AIaaS\backend\project_service\templates\deepnet_relu.tflite"
+AI forcecopytype
+AI setboard B-L475E-IOT01A2
+AI save "network"
+project generate
+exit

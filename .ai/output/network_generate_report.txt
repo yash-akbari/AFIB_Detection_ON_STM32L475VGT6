@@ -1,0 +1,221 @@
+STEdgeAI Core v9.0.0-19802
+Created date          : 2024-11-18 20:07:10
+Parameters            : generate --model af_lstm_weights.194-0.11.h5 --name network --workspace /tmp/rootDir-a529e3b2-f4d2-408a-a9e0-e29771b8fe3f/B-L475E-IOT01A2/.ai --output /tmp/rootDir-a529e3b2-f4d2-408a-a9e0-e29771b8fe3f/B-L475E-IOT01A2/.ai/output --target stm32l4 --allocate-inputs --allocate-outputs --optimization balanced --memory-pool /tmp/rootDir-a529e3b2-f4d2-408a-a9e0-e29771b8fe3f/B-L475E-IOT01A2/.ai/mempools-board.json --memory-pool /tmp/rootDir-a529e3b2-f4d2-408a-a9e0-e29771b8fe3f/B-L475E-IOT01A2/.ai/mempools-board.json
+
+Exec/report summary (generate)
+-----------------------------------------------------------------------------------------------------------------------
+model file         :   /tmp/rootDir-a529e3b2-f4d2-408a-a9e0-e29771b8fe3f/B-L475E-IOT01A2/af_lstm_weights.194-0.11.h5   
+type               :   keras                                                                                           
+c_name             :   network                                                                                         
+compression        :   lossless                                                                                        
+options            :   allocate-inputs, allocate-outputs, multi-heaps                                                  
+optimization       :   balanced                                                                                        
+target/series      :   stm32l4                                                                                         
+memory pool        :   /tmp/rootDir-a529e3b2-f4d2-408a-a9e0-e29771b8fe3f/B-L475E-IOT01A2/.ai/mempools-board.json       
+workspace dir      :   /tmp/rootDir-a529e3b2-f4d2-408a-a9e0-e29771b8fe3f/B-L475E-IOT01A2/.ai                           
+output dir         :   /tmp/rootDir-a529e3b2-f4d2-408a-a9e0-e29771b8fe3f/B-L475E-IOT01A2/.ai/output                    
+model_fmt          :   float                                                                                           
+model_name         :   af_lstm_weights_1940_11                                                                         
+model_hash         :   0xc5325b28724b0a39cb7150f50f8c846a                                                              
+params #           :   5,621 items (21.96 KiB)                                                                         
+-----------------------------------------------------------------------------------------------------------------------
+input 1/1          :   'input_0', f32(1x40x1), 160 Bytes, activations                                                  
+output 1/1         :   'dense_1', f32(1x1), 4 Bytes, activations                                                       
+macc               :   146,161                                                                                         
+weights (ro)       :   22,724 B (22.19 KiB) (1 segment) / +240(+1.1%) vs float model                                   
+activations (rw)   :   13,360 B (13.05 KiB) (1 segment) *                                                              
+ram (total)        :   13,360 B (13.05 KiB) = 13,360 + 0 + 0                                                           
+-----------------------------------------------------------------------------------------------------------------------
+(*) 'input'/'output' buffers can be used from the activations buffer
+ 
+ Memory-pools summary (activations/ domain)
+ --------------- -------- ------------------------ --------- 
+ name            id       used                     buffer#   
+ --------------- -------- ------------------------ --------- 
+ POOL_0_RAM      0        13.05 KiB (16.4%)        11        
+ weights_array   1        22.19 KiB (2272400.0%)   11        
+ POOL_1_RAM2     unused   -                        0         
+ --------------- -------- ------------------------ --------- 
+ Warning: ['POOL_1_RAM2'] memory pool is not used
+
+Model name - af_lstm_weights_1940_11
+------ ------------------------------------------------------ ----------------- ------------- -------- --------------------------- --- ------------------ ------------------- ------------------------------- 
+m_id   layer (type,original)                                  oshape            param/size        macc                connected to   | c_size             c_macc              c_type                          
+------ ------------------------------------------------------ ----------------- ------------- -------- --------------------------- --- ------------------ ------------------- ------------------------------- 
+0      input_0 (Input, None)                                  [b:1,h:40,c:1]                                                         | +14,560(+100.0%)   +142,400(+100.0%)   LSTM_/LSTM_/Concat_[0, 1, 2]    
+       forward_lstm (LSTM, Bidirectional)                     [b:1,h:40,c:20]   1,760/7,040     71,200                     input_0   | -7,040(-100.0%)    -71,200(-100.0%)    
+       backward_lstm (LSTM, Bidirectional)                    [b:1,h:40,c:20]   1,760/7,040     71,200                     input_0   | -7,040(-100.0%)    -71,200(-100.0%)    
+       bidirectional (Concat, Bidirectional)                  [b:1,h:40,c:40]                                         forward_lstm   |                                        
+                                                                                                                     backward_lstm   | 
+------ ------------------------------------------------------ ----------------- ------------- -------- --------------------------- --- ------------------ ------------------- ------------------------------- 
+1      global_max_pooling1d_pool (Pool, GlobalMaxPooling1D)   [b:1,h:1,c:40]                     1,600               bidirectional   |                                        Pool_[3]                        
+       global_max_pooling1d (Reshape, GlobalMaxPooling1D)     [b:1,c:40]                                 global_max_pooling1d_pool   |                                        
+------ ------------------------------------------------------ ----------------- ------------- -------- --------------------------- --- ------------------ ------------------- ------------------------------- 
+2      dense_dense (Dense, Dense)                             [b:1,c:50]        2,050/8,200      2,050        global_max_pooling1d   |                    +50(+2.4%)          Dense_/Nonlinearity_[4, 5]      
+       dense (Nonlinearity, Dense)                            [b:1,c:50]                            50                 dense_dense   |                    -50(-100.0%)        
+------ ------------------------------------------------------ ----------------- ------------- -------- --------------------------- --- ------------------ ------------------- ------------------------------- 
+4      dense_1_dense (Dense, Dense)                           [b:1,c:1]         51/204              51                       dense   |                    +10(+19.6%)         Dense_/Nonlinearity_[o][6, 7]   
+       dense_1 (Nonlinearity, Dense)                          [b:1,c:1]                             10               dense_1_dense   |                    -10(-100.0%)        
+------ ------------------------------------------------------ ----------------- ------------- -------- --------------------------- --- ------------------ ------------------- ------------------------------- 
+model/c-model: macc=146,161/146,161  weights=22,484/22,724 +240(+1.1%) activations=--/13,360 io=--/0
+
+
+
+Generated C-graph summary
+------------------------------------------------------------------------------------------------------------------------
+model name            : af_lstm_weights_1940_11
+c-name                : network
+c-node #              : 8
+c-array #             : 22
+activations size      : 13360 (1 segment)
+weights size          : 22724 (1 segment)
+macc                  : 146161
+inputs                : ['input_0_output']
+outputs               : ['dense_1_output']
+
+C-Arrays (22)
+------ ---------------------------------- ----------- ------------------------ ------------- --------- 
+c_id   name (*_array)                     item/size   domain/mem-pool          c-type        comment   
+------ ---------------------------------- ----------- ------------------------ ------------- --------- 
+0      backward_lstm_bias                 80/320      weights/weights          const float             
+1      backward_lstm_kernel               80/320      weights/weights          const float             
+2      backward_lstm_output0              800/3200    activations/POOL_0_RAM   float                   
+3      backward_lstm_peephole             60/240      weights/weights          const float             
+4      backward_lstm_recurrent            1600/6400   weights/weights          const float             
+5      backward_lstm_scratch0             140/560     activations/POOL_0_RAM   float                   
+6      bidirectional_output               1600/6400   activations/POOL_0_RAM   float                   
+7      dense_1_dense_bias                 1/4         weights/weights          const float             
+8      dense_1_dense_output               1/4         activations/POOL_0_RAM   float                   
+9      dense_1_dense_weights              50/200      weights/weights          const float             
+10     dense_1_output                     1/4         activations/POOL_0_RAM   float         /output   
+11     dense_dense_bias                   50/200      weights/weights          const float             
+12     dense_dense_output                 50/200      activations/POOL_0_RAM   float                   
+13     dense_dense_weights                2000/8000   weights/weights          const float             
+14     dense_output                       50/200      activations/POOL_0_RAM   float                   
+15     forward_lstm_bias                  80/320      weights/weights          const float             
+16     forward_lstm_kernel                80/320      weights/weights          const float             
+17     forward_lstm_output0               800/3200    activations/POOL_0_RAM   float                   
+18     forward_lstm_recurrent             1600/6400   weights/weights          const float             
+19     forward_lstm_scratch0              140/560     activations/POOL_0_RAM   float                   
+20     global_max_pooling1d_pool_output   40/160      activations/POOL_0_RAM   float                   
+21     input_0_output                     40/160      activations/POOL_0_RAM   float         /input    
+------ ---------------------------------- ----------- ------------------------ ------------- --------- 
+
+C-Layers (8)
+------ --------------------------- ---- --------------- ------- ------ ------------------------------------- ------------------- 
+c_id   name (*_layer)              id   layer_type      macc    rom    tensors                               shape (array id)    
+------ --------------------------- ---- --------------- ------- ------ ------------------------------------- ------------------- 
+0      backward_lstm               0    LSTM            71200   7280   I: input_0_output                     f32(1x40x1) (21)    
+                                                                       S: backward_lstm_scratch0                                 
+                                                                       W: backward_lstm_kernel               f32(80x1) (1)       
+                                                                       W: backward_lstm_recurrent            f32(80x20) (4)      
+                                                                       W: backward_lstm_peephole             f32(60x1x1x1) (3)   
+                                                                       W: backward_lstm_bias                 f32(80) (0)         
+                                                                       O: backward_lstm_output0              f32(1x40x20) (2)    
+------ --------------------------- ---- --------------- ------- ------ ------------------------------------- ------------------- 
+1      forward_lstm                0    LSTM            71200   7280   I: input_0_output                     f32(1x40x1) (21)    
+                                                                       S: forward_lstm_scratch0                                  
+                                                                       W: forward_lstm_kernel                f32(80x1) (16)      
+                                                                       W: forward_lstm_recurrent             f32(80x20) (18)     
+                                                                       W: backward_lstm_peephole             f32(60x1x1x1) (3)   
+                                                                       W: forward_lstm_bias                  f32(80) (15)        
+                                                                       O: forward_lstm_output0               f32(1x40x20) (17)   
+------ --------------------------- ---- --------------- ------- ------ ------------------------------------- ------------------- 
+2      bidirectional               0    Concat          0       0      I: forward_lstm_output0               f32(1x40x20) (17)   
+                                                                       I: backward_lstm_output0              f32(1x40x20) (17)   
+                                                                       O: bidirectional_output               f32(1x40x40) (6)    
+------ --------------------------- ---- --------------- ------- ------ ------------------------------------- ------------------- 
+3      global_max_pooling1d_pool   1    Pool            1600    0      I: bidirectional_output               f32(1x40x40) (6)    
+                                                                       O: global_max_pooling1d_pool_output   f32(1x1x40) (20)    
+------ --------------------------- ---- --------------- ------- ------ ------------------------------------- ------------------- 
+4      dense_dense                 2    Dense           2050    8200   I: global_max_pooling1d_pool_output   f32(1x1x40) (20)    
+                                                                       W: dense_dense_weights                f32(50x40) (13)     
+                                                                       W: dense_dense_bias                   f32(50) (11)        
+                                                                       O: dense_dense_output                 f32(1x50) (12)      
+------ --------------------------- ---- --------------- ------- ------ ------------------------------------- ------------------- 
+5      dense                       2    Nonlinearity    50      0      I: dense_dense_output                 f32(1x50) (12)      
+                                                                       O: dense_output                       f32(1x50) (14)      
+------ --------------------------- ---- --------------- ------- ------ ------------------------------------- ------------------- 
+6      dense_1_dense               4    Dense           51      204    I: dense_output                       f32(1x50) (14)      
+                                                                       W: dense_1_dense_weights              f32(1x50) (9)       
+                                                                       W: dense_1_dense_bias                 f32(1) (7)          
+                                                                       O: dense_1_dense_output               f32(1x1) (8)        
+------ --------------------------- ---- --------------- ------- ------ ------------------------------------- ------------------- 
+7      dense_1                     4    Nonlinearity    10      0      I: dense_1_dense_output               f32(1x1) (8)        
+                                                                       O: dense_1_output                     f32(1x1) (10)       
+------ --------------------------- ---- --------------- ------- ------ ------------------------------------- ------------------- 
+
+
+
+Number of operations per c-layer
+------- ------ ---------------------------------- --------- -------------- 
+c_id    m_id   name (type)                              #op           type 
+------- ------ ---------------------------------- --------- -------------- 
+0       0      backward_lstm (LSTM)                  71,200   smul_f32_f32 
+1       0      forward_lstm (LSTM)                   71,200   smul_f32_f32 
+2       0      bidirectional (Concat)                     0   smul_f32_f32 
+3       1      global_max_pooling1d_pool (Pool)       1,600   smul_f32_f32 
+4       2      dense_dense (Dense)                    2,050   smul_f32_f32 
+5       2      dense (Nonlinearity)                      50     op_f32_f32 
+6       4      dense_1_dense (Dense)                     51   smul_f32_f32 
+7       4      dense_1 (Nonlinearity)                    10     op_f32_f32 
+------- ------ ---------------------------------- --------- -------------- 
+total                                               146,161 
+
+Number of operation types
+---------------- --------- ----------- 
+operation type           #           % 
+---------------- --------- ----------- 
+smul_f32_f32       146,101      100.0% 
+op_f32_f32              60        0.0% 
+
+Complexity report (model)
+------ --------------------------- ------------------------- ------------------------- ----------- 
+m_id   name                        c_macc                    c_rom                     c_id        
+------ --------------------------- ------------------------- ------------------------- ----------- 
+0      input_0                     ||||||||||||||||  97.4%   ||||||||||||||||  64.1%   [0, 1, 2]   
+1      global_max_pooling1d_pool   |                  1.1%   |                  0.0%   [3]         
+2      dense_dense                 |                  1.4%   |||||||||         36.1%   [4, 5]      
+4      dense_1_dense               |                  0.0%   |                  0.9%   [6, 7]      
+------ --------------------------- ------------------------- ------------------------- ----------- 
+macc=146,161 weights=22,724 act=13,360 ram_io=0
+ 
+ Requested memory size per segment ("stm32l4" series)
+ ----------------------------- -------- -------- ------- -------- 
+ module                            text   rodata    data      bss 
+ ----------------------------- -------- -------- ------- -------- 
+ NetworkRuntime900_CM4_GCC.a     14,844        0       0        0 
+ network.o                          800       64   2,784      168 
+ network_data.o                      52       16      88        0 
+ lib (toolchain)*                 1,432       24      12        0 
+ ----------------------------- -------- -------- ------- -------- 
+ RT total**                      17,128      104   2,884      168 
+ ----------------------------- -------- -------- ------- -------- 
+ weights                              0   22,728       0        0 
+ activations                          0        0       0   13,360 
+ io                                   0        0       0        0 
+ ----------------------------- -------- -------- ------- -------- 
+ TOTAL                           17,128   22,832   2,884   13,528 
+ ----------------------------- -------- -------- ------- -------- 
+ *  toolchain objects (libm/libgcc*)
+ ** RT - AI runtime objects (kernels+infrastructure)
+  
+  Summary per type of memory device
+  ---------------------------------------------
+                FLASH       %      RAM       % 
+  ---------------------------------------------
+  RT total     20,116   47.0%    3,052   18.6% 
+  ---------------------------------------------
+  TOTAL        42,844           16,412         
+  ---------------------------------------------
+
+
+Generated files (7)
+---------------------------------------------------------------------------------------------------- 
+/tmp/rootDir-a529e3b2-f4d2-408a-a9e0-e29771b8fe3f/B-L475E-IOT01A2/.ai/output/network_data_params.h   
+/tmp/rootDir-a529e3b2-f4d2-408a-a9e0-e29771b8fe3f/B-L475E-IOT01A2/.ai/output/network_data_params.c   
+/tmp/rootDir-a529e3b2-f4d2-408a-a9e0-e29771b8fe3f/B-L475E-IOT01A2/.ai/output/network_data.h          
+/tmp/rootDir-a529e3b2-f4d2-408a-a9e0-e29771b8fe3f/B-L475E-IOT01A2/.ai/output/network_data.c          
+/tmp/rootDir-a529e3b2-f4d2-408a-a9e0-e29771b8fe3f/B-L475E-IOT01A2/.ai/output/network_config.h        
+/tmp/rootDir-a529e3b2-f4d2-408a-a9e0-e29771b8fe3f/B-L475E-IOT01A2/.ai/output/network.h               
+/tmp/rootDir-a529e3b2-f4d2-408a-a9e0-e29771b8fe3f/B-L475E-IOT01A2/.ai/output/network.c               

@@ -27,13 +27,15 @@ X-CUBE-AI/App/aiSystemPerformance.o: \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ramfunc.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h \
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim.h \
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
  ../X-CUBE-AI/App/app_x-cube-ai.h ../Middlewares/ST/AI/Inc/ai_platform.h \
  ../X-CUBE-AI/App/network.h ../X-CUBE-AI/App/network_config.h \
  ../X-CUBE-AI/App/network_data.h ../X-CUBE-AI/App/network_data_params.h \
  ../X-CUBE-AI/constants_ai.h ../X-CUBE-AI/App/lc_print.h \
- ../X-CUBE-AI/App/aiTestHelper.h \
+ ../X-CUBE-AI/App/aiTestHelper.h ../X-CUBE-AI/App/tim.h \
  ../Middlewares/ST/AI/Inc/ai_platform_interface.h \
  ../Middlewares/ST/AI/Inc/ai_platform.h \
  ../Middlewares/ST/AI/Inc/datatypes_network.h \
@@ -72,6 +74,8 @@ X-CUBE-AI/App/aiSystemPerformance.o: \
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ramfunc.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim.h:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h:
 ../X-CUBE-AI/App/app_x-cube-ai.h:
@@ -83,6 +87,7 @@ X-CUBE-AI/App/aiSystemPerformance.o: \
 ../X-CUBE-AI/constants_ai.h:
 ../X-CUBE-AI/App/lc_print.h:
 ../X-CUBE-AI/App/aiTestHelper.h:
+../X-CUBE-AI/App/tim.h:
 ../Middlewares/ST/AI/Inc/ai_platform_interface.h:
 ../Middlewares/ST/AI/Inc/ai_platform.h:
 ../Middlewares/ST/AI/Inc/datatypes_network.h:

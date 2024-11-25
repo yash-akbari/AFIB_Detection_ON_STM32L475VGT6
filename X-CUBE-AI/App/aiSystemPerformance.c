@@ -101,7 +101,7 @@
 #include <aiSystemPerformance.h>
 #include <aiTestUtility.h>
 #include <aiTestHelper.h>
-
+#include "tim.h"
 
 /* AI Run-time header files */
 #include "ai_platform_interface.h"
@@ -485,7 +485,6 @@ static int aiTestPerformance(int idx, int16_t *input_values)
 #endif
 
   MON_ALLOC_RESET();
-  HAL_Delay(5000);
 
   LC_PRINT("\nInitialised");
 
@@ -549,7 +548,6 @@ static int aiTestPerformance(int idx, int16_t *input_values)
         LC_PRINT("\r\n");  // Newline after each tensor's output
     }
     LC_PRINT("FINISHED\n");
-    HAL_Delay(1000);
 
     tend = cyclesCounterEnd();
 
@@ -681,80 +679,19 @@ int aiSystemPerformanceProcess(int16_t *data)
 {
   int r=0;
   int idx = 0;
+  uint16_t timer_val;
 
-  while (r==0)
-  {
-     r = aiTestPerformance(idx, data);
-    idx = (idx+1) % AI_MNETWORK_NUMBER;
+	  // Get current time (microseconds)
+	  HAL_TIM_Base_Start(&htim16);
+	  r = aiTestPerformance(idx, data);
+	  timer_val =__HAL_TIM_GET_COUNTER(&htim16);
+	  LC_PRINT("\nTime : %d us \n",timer_val);
+	  HAL_TIM_Base_Stop(&htim16);
+	  __HAL_TIM_SET_COUNTER(&htim16, 0);
+    LC_PRINT("\n0");
 
-    if (!r) {
-      r = aiTestConsole();
 
-      if (r == CONS_EVT_UNDEFINED) {
-        r = 0;
-      } else if (r == CONS_EVT_HELP) {
-        LC_PRINT("\r\n");
-        LC_PRINT("Possible key for the interactive console:\r\n");
-        LC_PRINT("  [q,Q]      quit the application\r\n");
-        LC_PRINT("  [r,R]      re-start (NN de-init and re-init)\r\n");
-        LC_PRINT("  [p,P]      pause\r\n");
-        LC_PRINT("  [d,D]      hide detailed information ('r' to restore)\r\n");
-        LC_PRINT("  [h,H,?]    this information\r\n");
-        LC_PRINT("   xx        continue immediately\r\n");
-        LC_PRINT("\r\n");
-        LC_PRINT("Press any key to continue..\r\n");
-
-        while ((r = aiTestConsole()) == CONS_EVT_TIMEOUT) {
-          port_hal_delay(1000);
-        }
-        if (r == CONS_EVT_UNDEFINED)
-          r = 0;
-      }
-      if (r == CONS_EVT_PROF) {
-        profiling_mode = true;
-        profiling_factor *= 2;
-        r = 0;
-      }
-
-      if (r == CONS_EVT_HIDE) {
-        observer_mode = false;
-        r = 0;
-      }
-
-      if (r == CONS_EVT_RESTART) {
-        profiling_mode = false;
-        observer_mode = true;
-        profiling_factor = 5;
-        LC_PRINT("\r\n");
-        aiDeInit();
-        aiSystemPerformanceInit();
-        r = 0;
-      }
-      if (r == CONS_EVT_QUIT) {
-        profiling_mode = false;
-        LC_PRINT("\r\n");
-        disableInts();
-        aiDeInit();
-        LC_PRINT("\r\n");
-        LC_PRINT("Board should be reseted...\r\n");
-        while (1) {
-          port_hal_delay(1000);
-        }
-      }
-      if (r == CONS_EVT_PAUSE) {
-        LC_PRINT("\r\n");
-        LC_PRINT("Press any key to continue..\r\n");
-        while ((r = aiTestConsole()) == CONS_EVT_TIMEOUT) {
-          port_hal_delay(1000);
-        }
-        r = 0;
-      }
-    }
-    LC_PRINT("\n%d",r);
-    break;
-  }
-
-  return r;
+  return 0;
 }
 
 void aiSystemPerformanceDeInit(void)
@@ -763,4 +700,3 @@ void aiSystemPerformanceDeInit(void)
   aiDeInit();
   LC_PRINT("bye bye ...\r\n");
 }
-

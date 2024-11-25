@@ -23,6 +23,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ramfunc.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h \
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim.h \
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
  ../X-CUBE-AI/App/app_x-cube-ai.h ../Middlewares/ST/AI/Inc/ai_platform.h \
@@ -30,7 +32,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../X-CUBE-AI/App/network_data.h ../X-CUBE-AI/App/network_data_params.h \
  ../X-CUBE-AI/App/ai_device_adaptor.h \
  ../Drivers/CMSIS/Include/cmsis_compiler.h ../X-CUBE-AI/Target/bsp_ai.h \
- ../X-CUBE-AI/constants_ai.h ../X-CUBE-AI/App/lc_print.h
+ ../X-CUBE-AI/constants_ai.h ../X-CUBE-AI/App/lc_print.h \
+ ../X-CUBE-AI/App/tim.h
 ../Core/Inc/main.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 ../Core/Inc/stm32l4xx_hal_conf.h:
@@ -56,6 +59,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ramfunc.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim.h:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h:
 ../X-CUBE-AI/App/app_x-cube-ai.h:
@@ -69,3 +74,4 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../X-CUBE-AI/Target/bsp_ai.h:
 ../X-CUBE-AI/constants_ai.h:
 ../X-CUBE-AI/App/lc_print.h:
+../X-CUBE-AI/App/tim.h:

@@ -24,11 +24,11 @@ Step 1: Clone the Repository
 Clone the repository to your local machine
 
 Step 2: Dataset
-The dataset is provided in .npz format and is already included in the repository. The dataset contains RR interval data and binary labels for Atrial Fibrillation detection.
+The dataset is provided in .npz format and is already included as link in the repository. The dataset contains RR interval data and binary labels for Atrial Fibrillation detection.
 
 The RR interval data consists of 40 beats with a 39-beat overlap.
 The labels are binary: 0 for no AFib and 1 for AFib.
-You can find the dataset in the data/ folder. The .npz file is already preprocessed and split for use in training the model.
+You can find the dataset in the [data/file](https://drive.google.com/drive/folders/1qivNQRquVAQf1RDmAmEgMmdXacn2jTCA?usp=sharing). The .npz file is already preprocessed and split for use in training the model.
 
 If you need to preprocess or modify the dataset, you can follow the steps in the data_processing.py script included in the repository.
 

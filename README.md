@@ -1,6 +1,6 @@
 AFIB_Detection_ON_STM32L475VGT6
 
-his repository provides an end-to-end solution for detecting Atrial Fibrillation (AFib) using a BiLSTM-based model. The project focuses on training the model with RR interval data, optimizing it for low power consumption on the STM32L475VGT6 microcontroller.
+This repository provides an end-to-end solution for detecting Atrial Fibrillation (AFib) using a BiLSTM-based model. The project focuses on training the model with RR interval data, optimizing it for low power consumption on the STM32L475VGT6 microcontroller.
 
 Table of Contents
 Prerequisites
